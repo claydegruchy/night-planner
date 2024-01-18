@@ -5,12 +5,34 @@ export function generateName() {
 }
 
 
+const boardGameSubCategories = [
+    { name: "Deckbuilders", },
+    { name: "Worker placement", },
+    { name: "Card games", },
+    { name: "Cooperative", },
+]
+
+const sportsSubCategories = [
+    { name: "Football", },
+    { name: "Basketball", },
+    { name: "Tennis", },
+    { name: "Rugby", },]
+
+const movieSubCategories = [
+    { name: "Action", },
+    { name: "Comedy", },
+    { name: "Horror", },
+    { name: "Thriller", },
+]
+
 export const attendeeTemplate = () => ({
     name: generateName(),
     Activities: [
-        { name: "Boardgames" },
-        { name: "Sports" },
-        { name: "Movies" },
+        {
+            name: "Boardgames", subCategories: boardGameSubCategories
+        },
+        { name: "Sports", subCategories: sportsSubCategories },
+        { name: "Movies", subCategories: movieSubCategories },
     ],
 
     Diet: [

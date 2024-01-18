@@ -14,13 +14,20 @@
   export let attendees = writable([]);
   setContext("attendees", attendees);
 
-  let value = 0;
-
   const addAttendee = () => {
     attendees.update((attendees) => [...attendees, attendeeTemplate()]);
+    value++;
+  };
+  const removeAttendee = (attendee) => {
+    if (attendees) {
+      attendees.update((attendees) => attendees.filter((a) => a !== attendee));
+      return;
+    }
+    attendees.update((attendees) => attendees.slice(0, -1));
+    value--;
   };
 
-  // $: attendees, console.log($attendees);
+  let value = 0;
 
   onMount(() => {
     addAttendee();
@@ -29,22 +36,41 @@
 
 <body>
   <button on:click={addAttendee}>Add Attendee</button>
-  <NumberInput bind:value />
 
-  <div class="attendees">
-    {#each $attendees as attendee}
-      <Attendee bind:attendee>
-        <div slot="activities">
-          {#each attendee.Activities as option}
-            <Tag bind:option></Tag>
-          {/each}
-        </div>
-        <div slot="diet">
-          {#each attendee.Diet as option}
-            <Tag bind:option></Tag>
-          {/each}
-        </div>
-      </Attendee>
-    {/each}
-  </div></body
->
+  <div class="container">
+    <div class="attendees">
+      {value}
+      {#each $attendees as attendee}
+        <Attendee bind:attendee {removeAttendee}>
+          <div slot="activities">
+            {#each attendee.Activities as option}
+              <Tag bind:option></Tag>
+            {/each}
+          </div>
+          <div slot="diet">
+            {#each attendee.Diet as option}
+              <Tag bind:option></Tag>
+            {/each}
+          </div>
+        </Attendee>
+      {/each}
+    </div>
+    <div class="actitivies">hello</div>
+  </div>
+</body>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* 50/50 screen space beteween both, with both centre in their area, and a border on both */
+    justify-content: space-evenly;
+    border: 1px solid black;
+  }
+  /* overflow scroll attendees */
+  .attendees {
+    overflow-y: scroll;
+    width: 50%;
+  }
+</style>
