@@ -10,54 +10,51 @@ const boardGameSubCategories = [
     { name: "Worker placement", },
     { name: "Card games", },
     { name: "Cooperative", },
-]
+].map((subCategory) => ({ ...subCategory, parent: "Boardgames" }))
 
 const sportsSubCategories = [
     { name: "Football", },
     { name: "Basketball", },
     { name: "Tennis", },
-    { name: "Rugby", },]
+    { name: "Rugby", },
+].map((subCategory) => ({ ...subCategory, parent: "Sports" }))
 
 const movieSubCategories = [
     { name: "Action", },
     { name: "Comedy", },
     { name: "Horror", },
     { name: "Thriller", },
-]
+].map((subCategory) => ({ ...subCategory, parent: "Movies" }))
 
 const videoGameSubCategories = [
     { name: "RPG", },
     { name: "FPS", },
     { name: "Casual", },
     { name: "MOBA", },
+].map((subCategory) => ({ ...subCategory, parent: "Video Games" }))
+
+export const tags = [
+    {
+        type: 'tag', category: 'Activities', parent: null, name: "Boardgames"
+    },
+    { type: 'tag', category: 'Activities', parent: null, name: "Sports", },
+    { type: 'tag', category: 'Activities', parent: null, name: "Movies", },
+    { type: 'tag', category: 'Activities', parent: null, name: "Video Games", },
+
+    { type: 'tag', category: 'Diet', parent: null, name: "Animal Products" },
+    { type: 'tag', category: 'Diet', parent: null, name: "Gluten" },
+    { type: 'tag', category: 'Diet', parent: null, name: "Alchohol" },
+    { type: 'tag', category: 'General', parent: null, name: "Likes to Party" },
+    { type: 'tag', category: 'General', parent: null, name: "Conversationalist" },
+    { type: 'tag', category: 'General', parent: null, name: "Foodie" },
+    ...boardGameSubCategories,
+    ...sportsSubCategories,
+    ...movieSubCategories,
+    ...videoGameSubCategories,
+
 ]
 
-export const attendeeTags = {
-    Activities: [
-        {
-            name: "Boardgames", subCategories: boardGameSubCategories
-        },
-        { name: "Sports", subCategories: sportsSubCategories },
-        { name: "Movies", subCategories: movieSubCategories },
-        { name: "Video Games", subCategories: videoGameSubCategories },
-    ],
-
-    Diet: [
-        { name: "Animal Products" },
-        { name: "Gluten" },
-        { name: "Alchohol" },
-    ],
-    General: [
-        { name: "Likes to Party" },
-        { name: "Conversationalist" },
-        { name: "Foodie" },
-
-    ],
-}
-
-export const attendeeTemplate = () => ({
+export const attendeeTemplate = () => JSON.parse(JSON.stringify(({
     name: generateName(),
-    ...attendeeTags,
-})
-
-
+    tags,
+})))

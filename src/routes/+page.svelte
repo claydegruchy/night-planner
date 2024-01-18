@@ -2,63 +2,57 @@
   import "../app.css";
   import { onMount } from "svelte";
   import { setContext } from "svelte";
-  import { writable } from "svelte/store";
+
   import Attendee from "../components/Attendee.svelte";
   import Tag from "../components/Tag.svelte";
   import Suggestions from "../components/Suggestions.svelte";
+  import StringInput from "../components/StringInput.svelte";
 
-  import { attendeeTemplate } from "$lib/utils";
+  import {
+    attendees,
+    addAttendee,
+    removeAttendee,
+    updateAttendee,
+  } from "$lib/sharedState";
 
-  export let attendees = writable([]);
-  setContext("attendees", attendees);
+  import { tags } from "$lib/utils";
 
-  const addAttendee = () => {
-    attendees.update((attendees) => [...attendees, attendeeTemplate()]);
-    value++;
-  };
-  const removeAttendee = (attendee) => {
-    if (attendees) {
-      attendees.update((attendees) => attendees.filter((a) => a !== attendee));
-      return;
-    }
-    attendees.update((attendees) => attendees.slice(0, -1));
-    value--;
-  };
-
-  let value = 0;
   // $: attendees, console.log($attendees);
   onMount(() => {
     addAttendee();
   });
+
+  const tagCategories = [
+    ...new Set(tags.map((t) => t.category).filter((t) => t)),
+  ];
 </script>
 
 <body>
   <button on:click={addAttendee}>Add Attendee</button>
   <div class="container">
     <div class="attendees">
-      {value}
-      {#each $attendees as attendee (attendee.name)}
+      {#each $attendees as attendee}
         <Attendee bind:attendee {removeAttendee}>
-          <div slot="activities">
-            {#each attendee.Activities as option}
-              <Tag bind:option {attendee}></Tag>
-            {/each}
+          <div slot="title">
+            <StringInput bind:value={attendee.name}>Name</StringInput>
           </div>
-          <div slot="diet">
-            {#each attendee.Diet as option}
-              <Tag bind:option {attendee}></Tag>
-            {/each}
-          </div>
-          <div slot="general">
-            {#each attendee.General as option}
-              <Tag bind:option {attendee}></Tag>
+          <div slot="tags">
+            {#each tagCategories as category}
+              <div>
+                <h4>{category}</h4>
+                {#each attendee.tags.filter((t) => t.category == category) as tag}
+                  <Tag {attendee} {tag}>
+                    {tag.name}
+                  </Tag>
+                {/each}
+              </div>
             {/each}
           </div>
         </Attendee>
       {/each}
     </div>
     <div class="actitivies">
-      <Suggestions bind:attendees />
+      <Suggestions {attendees} />
     </div>
   </div>
 </body>
@@ -67,9 +61,16 @@
   .container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    /* 50/50 screen space beteween both, with both centre in their area, and a border on both */
+    /* cut the flex in half down the middle, then centre each part, ignoreing content size */
     justify-content: space-evenly;
-    border: 1px solid black;
+    align-items: center;
+  }
+
+  .attendees {
+    /* flex: 1; */
+  }
+
+  .activities {
+    /* flex: 1; */
   }
 </style>

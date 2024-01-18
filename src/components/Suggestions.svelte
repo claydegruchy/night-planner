@@ -1,9 +1,10 @@
 <script>
   import { createSuggestions } from "$lib/suggestionRules";
   export let attendees;
+  let suggestions = [];
 
-  const suggestions = createSuggestions($attendees);
-  console.log(suggestions);
+  $: suggestions = createSuggestions($attendees);
+  $: attendees, console.log({ suggestions });
 </script>
 
 <div>

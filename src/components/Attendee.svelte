@@ -1,24 +1,14 @@
 <script>
   import StringInput from "./StringInput.svelte";
+  import { tags } from "$lib/utils";
   export let attendee;
   export let removeAttendee;
 </script>
 
 <div class="attendee">
-  <h1><StringInput bind:value={attendee.name}>Name</StringInput></h1>
-  <div>
-    <h2>Activities</h2>
-    <slot name="activities" />
-  </div>
-  <div>
-    <h2>Diet</h2>
-    <slot name="diet" />
-  </div>
+  <h1><slot name="title" /></h1>
+  <slot name="tags" />
 
-  <div>
-    <h2>General</h2>
-    <slot name="general" />
-  </div>
   <button on:click={() => removeAttendee(attendee)}>Remove</button>
 </div>
 
