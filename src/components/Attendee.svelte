@@ -14,6 +14,11 @@
     <h2>Diet</h2>
     <slot name="diet" />
   </div>
+
+  <div>
+    <h2>General</h2>
+    <slot name="general" />
+  </div>
   <button on:click={() => removeAttendee(attendee)}>Remove</button>
 </div>
 

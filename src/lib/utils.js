@@ -25,14 +25,21 @@ const movieSubCategories = [
     { name: "Thriller", },
 ]
 
-export const attendeeTemplate = () => ({
-    name: generateName(),
+const videoGameSubCategories = [
+    { name: "RPG", },
+    { name: "FPS", },
+    { name: "Casual", },
+    { name: "MOBA", },
+]
+
+export const attendeeTags = {
     Activities: [
         {
             name: "Boardgames", subCategories: boardGameSubCategories
         },
         { name: "Sports", subCategories: sportsSubCategories },
         { name: "Movies", subCategories: movieSubCategories },
+        { name: "Video Games", subCategories: videoGameSubCategories },
     ],
 
     Diet: [
@@ -40,4 +47,17 @@ export const attendeeTemplate = () => ({
         { name: "Gluten" },
         { name: "Alchohol" },
     ],
+    General: [
+        { name: "Likes to Party" },
+        { name: "Conversationalist" },
+        { name: "Foodie" },
+
+    ],
+}
+
+export const attendeeTemplate = () => ({
+    name: generateName(),
+    ...attendeeTags,
 })
+
+

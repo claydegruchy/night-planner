@@ -1,5 +1,7 @@
 <script>
   export let option;
+  export let attendee;
+  console.log(attendee.name);
   if (!option.state) option.state = "unselected";
 
   const cycleState = () => {
