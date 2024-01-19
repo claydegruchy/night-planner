@@ -52,7 +52,7 @@ export const tags = [
     ...movieSubCategories,
     ...videoGameSubCategories,
 
-]
+].map((tag) => ({ ...tag, state: 1 }))
 
 export const attendeeTemplate = () => JSON.parse(JSON.stringify(({
     name: generateName(),

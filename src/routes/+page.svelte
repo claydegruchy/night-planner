@@ -17,7 +17,6 @@
 
   import { tags } from "$lib/utils";
 
-  // $: attendees, console.log($attendees);
   onMount(() => {
     addAttendee();
   });
@@ -41,7 +40,11 @@
               <div>
                 <h4>{category}</h4>
                 {#each attendee.tags.filter((t) => t.category == category) as tag}
-                  <Tag {attendee} {tag}>
+                  <Tag
+                    {tag}
+                    on:click={() =>
+                      tag.state > 2 ? (tag.state = 1) : (tag.state += 1)}
+                  >
                     {tag.name}
                   </Tag>
                 {/each}
@@ -52,7 +55,8 @@
       {/each}
     </div>
     <div class="actitivies">
-      <Suggestions {attendees} />
+      <!-- <Suggestions {attendees} /> -->
+      <pre>{JSON.stringify($attendees, null, 2)}</pre>
     </div>
   </div>
 </body>
@@ -61,16 +65,13 @@
   .container {
     display: flex;
     flex-direction: row;
-    /* cut the flex in half down the middle, then centre each part, ignoreing content size */
-    justify-content: space-evenly;
-    align-items: center;
   }
 
   .attendees {
-    /* flex: 1; */
+    flex: 1;
   }
 
-  .activities {
-    /* flex: 1; */
+  .actitivies {
+    flex: 1;
   }
 </style>

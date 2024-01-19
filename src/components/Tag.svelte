@@ -1,28 +1,17 @@
 <script>
   export let tag;
   export let attendee;
-  if (!tag.state) tag.state = "unselected";
-
-  const cycleState = (option) => {
-    if (tag.state == "unselected") {
-      tag.state = "likes";
-    } else if (tag.state == "likes") {
-      tag.state = "dislikes";
-    } else if (tag.state == "dislikes") {
-      tag.state = "unselected";
-    }
-  };
 </script>
 
 <div>
-  {#if tag.state == "unselected"}
-    <button on:click={cycleState}>🤷{tag.name}</button>
-  {:else if tag.state == "likes"}
-    <button on:click={cycleState} class="likes">👌{tag.name}</button>
-  {:else if tag.state == "dislikes"}
-    <button on:click={cycleState} class="dislikes">😠{tag.name}</button>
-  {:else if tag.state == "mixed"}
-    <button on:click={cycleState} class="mixed">🤔{tag.name}</button>
+  {#if tag.state == 1}
+    <button on:click>🤷{tag.name}</button>
+  {:else if tag.state == 2}
+    <button on:click class="likes">👌{tag.name}</button>
+  {:else if tag.state == 3}
+    <button on:click class="dislikes">😠{tag.name}</button>
+  {:else if tag.state == 4}
+    <button on:click class="mixed">🤔{tag.name}</button>
   {:else}error{/if}
 </div>
 
