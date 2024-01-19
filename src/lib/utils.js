@@ -41,9 +41,16 @@ export const tags = [
     { type: 'tag', category: 'Activities', parent: null, name: "Movies", },
     { type: 'tag', category: 'Activities', parent: null, name: "Video Games", },
 
-    { type: 'tag', category: 'Diet', parent: null, name: "Animal Products" },
-    { type: 'tag', category: 'Diet', parent: null, name: "Gluten" },
-    { type: 'tag', category: 'Diet', parent: null, name: "Alchohol" },
+    { type: 'tag', category: 'Food', parent: null, name: "Italian" },
+    { type: 'tag', category: 'Food', parent: null, name: "Burgers" },
+    { type: 'tag', category: 'Food', parent: null, name: "Asian" },
+    { type: 'tag', category: 'Food', parent: null, name: "Middle Eastern" },
+
+
+    { type: 'tag', category: 'Diet limits', parent: null, name: "Animal Products" },
+    { type: 'tag', category: 'Diet limits', parent: null, name: "Gluten" },
+    { type: 'tag', category: 'Diet limits', parent: null, name: "Alchohol" },
+
     { type: 'tag', category: 'General', parent: null, name: "Likes to Party" },
     { type: 'tag', category: 'General', parent: null, name: "Conversationalist" },
     { type: 'tag', category: 'General', parent: null, name: "Foodie" },

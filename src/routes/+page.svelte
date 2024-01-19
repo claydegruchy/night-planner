@@ -8,11 +8,7 @@
   import Suggestions from "../components/Suggestions.svelte";
   import StringInput from "../components/StringInput.svelte";
 
-  import {
-    attendees,
-    addAttendee,
-    removeAttendee,
-  } from "$lib/sharedState";
+  import { attendees, addAttendee, removeAttendee } from "$lib/sharedState";
 
   import { tags } from "$lib/utils";
 
