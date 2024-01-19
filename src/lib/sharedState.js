@@ -15,10 +15,4 @@ export const removeAttendee = (attendee) => {
     attendees.update((attendees) => attendees.slice(0, -1));
 };
 
-export const updateAttendee = (attendee, key, value) => {
-    attendees.update((attendees) => {
-        const index = attendees.indexOf(attendee);
-        attendees[index][key] = value;
-        return attendees;
-    });
-}
+

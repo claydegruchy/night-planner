@@ -12,7 +12,6 @@
     attendees,
     addAttendee,
     removeAttendee,
-    updateAttendee,
   } from "$lib/sharedState";
 
   import { tags } from "$lib/utils";
@@ -39,7 +38,7 @@
             {#each tagCategories as category}
               <div>
                 <h4>{category}</h4>
-                {#each attendee.tags.filter((t) => t.category == category) as tag}
+                {#each attendee.tags.filter((t) => t.category == category) as tag (tag.name)}
                   <Tag
                     {tag}
                     on:click={() =>
@@ -55,7 +54,7 @@
       {/each}
     </div>
     <div class="actitivies">
-      <!-- <Suggestions {attendees} /> -->
+      <Suggestions {attendees} />
       <pre>{JSON.stringify($attendees, null, 2)}</pre>
     </div>
   </div>
